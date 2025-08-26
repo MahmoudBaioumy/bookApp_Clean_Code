@@ -116,6 +116,9 @@ class _HomeScreenState extends State<HomeView> {
                   color: Theme.of(context).primaryColor,
                 ),
           ),
+          Spacer(),
+          IconButton(onPressed: (){},
+              icon: Icon(Icons.search, color: Theme.of(context).primaryColor,),)
         ],
       ),
     );

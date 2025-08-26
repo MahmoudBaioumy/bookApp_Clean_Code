@@ -1,5 +1,6 @@
 
 import 'package:flustra_template/core/constants/app_defults.dart';
+import 'package:flustra_template/modules/Profile/view/main_profile_view.dart';
 import 'package:flustra_template/modules/Profile/view/profile_view.dart';
 import 'package:flustra_template/modules/Wishist/view/wishist_view.dart';
 import 'package:flustra_template/modules/cart/view/cart_view.dart';
@@ -21,7 +22,7 @@ final List _pages = [
   const HomeView(),
   const CartScreen(),
   const WishistView(),
-  const ProfileView(),
+  const MainProfileView(),
 ];
 
 class _NavBarViewState extends State<NavBarView> {

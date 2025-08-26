@@ -1,5 +1,7 @@
 import 'package:flustra_template/core/common/error_handler/failure.dart';
-import 'package:flustra_template/modules/cart/data/cart_response.dart';
+import 'package:flustra_template/core/services/bot_toast/app_bot_toast.dart';
+import 'package:flustra_template/modules/cart/data/responses/cart_response.dart';
+import 'package:flustra_template/modules/cart/data/request/cart_request.dart';
 import 'package:flustra_template/modules/cart/logic/cart_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -55,11 +57,23 @@ class CartController extends ChangeNotifier {
     }
   }
 
-// -------------------------- onRemove -------------------------- //
-  void onRemoveItem(int id) {
+// -------------------------- _removeItemFromList (remove item from list) -------------------------- //
+  void _removeItemFromList(int id) {
     _cartItems.removeWhere((e) => e.itemId == id);
     notifyListeners();
   }
+  // -------------------------- onRemoveItem -------------------------- //
+  Future<void> onRemoveItem(int id) async {
+    final res = await _cubit.removeItemCart(itemId: id);
+    res.fold(
+          (failure) => failure.showToast(),
+          (r) {
+        _removeItemFromList(id);
+        AppBotToast.show("Item removed successfully", type: ToastType.success);
+      },
+    );
+  }
+
 
   void onTapCheckout() {
     debugPrint("Checkout Pressed");

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flustra_template/core/constants/app_images.dart';
 import 'package:flustra_template/core/extensions/trans_extention.dart';
 import 'package:flustra_template/core/localization/app_strings_localizations.dart';
+import 'package:flustra_template/core/localization/tr/de.dart';
 
 import '../../main.dart';
 import 'tr/ar.dart';
@@ -28,7 +29,7 @@ class AppLocalizationController {
       flagAsset: AppAssetsImages.flags.flagOfEgypt,
     ),
     'de': LanguageOption(
-      json: enJson,
+      json: deJson,
       // todo : add DE json languages
       locale: const Locale('de'),
       nameRaw: 'Deutsch',

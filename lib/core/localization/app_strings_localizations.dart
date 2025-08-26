@@ -1,7 +1,15 @@
 abstract class AppStrings {
   // ========================== 🔥 Other 🔥 ==========================
   static const String noMoreData = 'No more data'; // todo
-
+  static const String contactImpl = 'for inquiries,send a message or contact us via our support email';
+  static const String contactUsTitle = 'Contact Support';
+  static const String writeMessage = 'write Your Message....';
+  static const String subject = 'Subject';
+  static const String send = 'Send';
+  static const String description = 'Description:';
+  static const String about = 'About';
+  static const String favorite = 'favorite';
+  static const String noFavorites = 'noFavorites';
   // ========================== 🔥 translations label 🔥 ==========================
   static const String english = 'English';
   static const String arabic = 'Arabic';
@@ -24,11 +32,14 @@ abstract class AppStrings {
   static const String address = 'Address';
   static const String profile = 'Profile';
   static const String editProfile = 'EditProfile';
+  static const String lang = 'Language';
+  static const String chooseLanguage = 'chooseLanguage';
 
 
   // ========================== 🔥 home 🔥 ==========================//
   static const String bestSeller = 'Best Seller';
   static const String newArrival = 'New Arrival';
+
 
 
   // ========================== 🔥 Validations 🔥 ==========================

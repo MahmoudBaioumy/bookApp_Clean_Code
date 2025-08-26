@@ -1,4 +1,5 @@
 import 'package:flustra_template/core/constants/app_defults.dart';
+import 'package:flustra_template/core/constants/app_images.dart';
 import 'package:flustra_template/core/helper/base_cubit/block_builder_widget.dart';
 import 'package:flustra_template/core/helper/uti/shimmer_templates.dart';
 import 'package:flustra_template/core/helper/widgets/custom_smart_refresher.dart';
@@ -6,6 +7,7 @@ import 'package:flustra_template/core/router/app_router.dart';
 import 'package:flustra_template/core/router/route_help_methods.dart';
 import 'package:flustra_template/modules/cart/logic/cart_cubit.dart';
 import 'package:flustra_template/modules/cart/view/widgets/cart_item_widget.dart';
+import 'package:flustra_template/modules/cart/view/widgets/empty_screen_cart.dart';
 import 'package:flutter/material.dart';
 import 'cart_controller.dart';
 
@@ -34,8 +36,6 @@ class _CartScreenState extends State<CartScreen> {
     _controller.init();
   }
 
-  @override
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,6 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-
 // -------------------------- _buildListCartView -------------------------- //
 
   Widget _buildCartBookListener() {
@@ -90,7 +89,15 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+// -------------------------- _buildListCartView -------------------------- //
   Widget _buildListCartView({required bool isLoading}) {
+    if (_controller.cartItems.isEmpty) {
+      return Center(
+          child: EmptyScreen(
+        title: 'Your cart is empty',
+        image: AppAssetsImages.other.emptyCart,
+      ));
+    }
     return ListView.separated(
       separatorBuilder: (context, index) => SizedBox(height: 10),
       itemCount: isLoading ? 5 : _controller.cartItems.length,

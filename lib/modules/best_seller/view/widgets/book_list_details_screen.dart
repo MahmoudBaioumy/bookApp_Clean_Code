@@ -1,3 +1,6 @@
+import 'package:flustra_template/core/router/app_router.dart';
+import 'package:flustra_template/core/router/route_help_methods.dart';
+import 'package:flustra_template/modules/best_seller/view/best_seller_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flustra_template/modules/home/data/response/book_response.dart';
 import 'package:flustra_template/modules/best_seller/view/widgets/bestSeller_bookItem_widget.dart';
@@ -6,13 +9,15 @@ class BooksListScreen extends StatelessWidget {
   final String title;
   final List<Products> products;
 
-  const BooksListScreen({
+  BooksListScreen({
     super.key,
     required this.title,
     required this.products,
   });
 
   @override
+  final BestSellerBooksDetailsController controller = BestSellerBooksDetailsController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
@@ -24,8 +29,14 @@ class BooksListScreen extends StatelessWidget {
           final book = products[index];
           return BestSellerBookItemWidget(
             book: book,
+            onTapAddToCart: () async{
+            await controller.onTapCart(book.id ??0);
+            },
+            onTapAddToFav: () {
+              print('onTapAddToFav');
+            },
             onTap: () {
-              // navigateTo details or do whatever
+              navigateTo(AppRoutes.BestSellerBooksdetails, arguments: book);
             },
           );
         },

@@ -2,6 +2,10 @@ import 'package:flustra_template/core/data/cache/cache_service.dart';
 import 'package:flustra_template/core/data/cache/shared_prefs_cache_service.dart';
 import 'package:flustra_template/core/data/network/api_service_repo.dart';
 import 'package:flustra_template/core/data/network/dio_api_service.dart';
+import 'package:flustra_template/modules/Profile/data/repo.dart';
+import 'package:flustra_template/modules/Profile/logic/profile_cubit.dart';
+import 'package:flustra_template/modules/Wishist/data/repo.dart';
+import 'package:flustra_template/modules/Wishist/logic/fav_cubit.dart';
 import 'package:flustra_template/modules/auth/data/auth_repo.dart';
 import 'package:flustra_template/modules/auth/logic/auth_cubit.dart';
 import 'package:flustra_template/modules/best_seller/data/repo/best_seller_repo.dart';
@@ -41,6 +45,8 @@ void initRepositories() {
   getIt.registerSingleton<bestSellerRepo>(bestSellerRepoImp());
   getIt.registerSingleton<NewArrivalsRepo>(NewArrivalsRepoImp());
   getIt.registerSingleton<CartRepo>(CartImp());
+  getIt.registerSingleton<ProfileRepo>(ProfileImp());
+  getIt.registerSingleton<WishlistRepo>(WishlistImp());
 }
 
 // ========================== 🔥 cubits 🔥 ==========================
@@ -50,4 +56,6 @@ void initCubits() {
   getIt.registerLazySingleton<bestSellerCubit>(() => bestSellerCubit(getIt<bestSellerRepo>()));
   getIt.registerLazySingleton<newArrivalCubit>(() => newArrivalCubit(getIt<NewArrivalsRepo>()));
   getIt.registerLazySingleton<CartCubit>(() => CartCubit(getIt<CartRepo>()));
+  getIt.registerLazySingleton<ProfileCubit>(() => ProfileCubit(getIt<ProfileRepo>()));
+  getIt.registerLazySingleton<WishlistCubit>(() => WishlistCubit(getIt<WishlistRepo>()));
 }

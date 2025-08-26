@@ -33,13 +33,13 @@ class AuthResposne {
 }
 
 class Data {
-  User? user;
+  Userdata? user;
   String? token;
 
   Data({this.user, this.token});
 
   Data.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? new Userdata.fromJson(json['user']) : null;
     token = json['token'];
   }
 
@@ -53,7 +53,7 @@ class Data {
   }
 }
 
-class User {
+class Userdata {
   int? id;
   String? name;
   String? email;
@@ -62,9 +62,9 @@ class User {
   bool? emailVerified;
   String? image;
 
-  User({this.id, this.name, this.email, this.city, this.phone, this.emailVerified, this.image});
+  Userdata({this.id, this.name, this.email, this.city, this.phone, this.emailVerified, this.image});
 
-  User.fromJson(Map<String, dynamic> json) {
+  Userdata.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];

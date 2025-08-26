@@ -26,4 +26,8 @@ class _AppAssetsImagesFlags {
 
 class _AppAssetsImagesOther {
   const _AppAssetsImagesOther._();
+
+  final String contact = 'assets/images/app_images/contact.jpg';
+  final String emptyCart = 'assets/images/app_images/emptyCart.png';
+  final String emptyFavorite = 'assets/images/app_images/favEmpty.png';
 }

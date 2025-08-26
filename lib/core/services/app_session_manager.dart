@@ -6,31 +6,37 @@ import '../data/cache/cache_key.dart';
 class AppSessionManager {
   AppSessionManager._();
 
-  static AuthResposne? _user;
+  static AuthResposne? response;
 
-  static User? get user => _user?.data?.user;
-  static String? get token => _user?.data?.token;
-  static bool get amILogin => _user?.data?.token?.isNotEmpty ?? false;
+  static Userdata? get user => response?.data?.user;
+  static String? get token => response?.data?.token;
+  static bool get amILogin => response?.data?.token?.isNotEmpty ?? false;
 
   static void updateUserToken(String token) {
-    _user?.data?.token = token;
-    updateUser(_user);
+    response?.data?.token = token;
+    updateUser(response);
+  }
+
+  /// pass null that mean user will removes
+  static void updateUserOnly(Userdata? user) {
+    response?.data?.user = user;
+    updateUser(response);
   }
 
   /// pass null that mean user will removes
   static void updateUser(AuthResposne? authResposne) {
-    _user = authResposne;
+    response = authResposne;
 // -------------------------- Save response data -------------------------- //
     if (authResposne == null) {
       AppCache.remove(key: CacheKey.loginResponse);
       return;
     }
-    AppCache.saveData(key: CacheKey.loginResponse, value: _user?.toJson());
+    AppCache.saveData(key: CacheKey.loginResponse, value: response?.toJson());
   }
 
   static void init() {
     var res = AppCache.getMap(key: CacheKey.loginResponse);
     if (res == null) return;
-    _user = AuthResposne.fromJson(res);
+    response = AuthResposne.fromJson(res);
   }
 }

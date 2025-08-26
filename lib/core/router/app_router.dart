@@ -1,14 +1,16 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flustra_template/core/localization/locale_watcher.dart';
 import 'package:flustra_template/main.dart';
+import 'package:flustra_template/modules/Profile/view/lang_view.dart';
 import 'package:flustra_template/modules/Profile/view/profile_view.dart';
+import 'package:flustra_template/modules/Profile/view/contact_support.dart';
+import 'package:flustra_template/modules/Wishist/view/wishist_view.dart';
 import 'package:flustra_template/modules/auth/view/login/login_screen.dart';
 import 'package:flustra_template/modules/auth/view/sign_in/register_screen.dart';
-import 'package:flustra_template/modules/best_seller/view/best_seller_view.dart';
-import 'package:flustra_template/modules/best_seller/view/widgets/best_seller_detials.dart';
+import 'package:flustra_template/modules/best_seller/view/best_seller_detials.dart';
 import 'package:flustra_template/modules/cart/view/cart_view.dart';
 import 'package:flustra_template/modules/home/data/response/book_response.dart';
-import 'package:flustra_template/modules/home/view/bokk_list_screen.dart';
+import 'package:flustra_template/modules/best_seller/view/widgets/book_list_details_screen.dart';
 import 'package:flustra_template/modules/home/view/home_view.dart';
 import 'package:flustra_template/modules/nav_bar/nav_bar_screen.dart';
 import 'package:flustra_template/modules/splash/splash_view.dart';
@@ -36,6 +38,9 @@ abstract class AppRoutes {
   static const String BooksListScreen = '/BooksListScreen';
   static const String cartScreen = '/CartScreen';
   static const String profile = '/ProfileView';
+  static const String languageSelectionScreen = '/languageSelectionScreen';
+  static const String ContactSupport = '/ContactSupport';
+  static const String wishist = '/WishistView';
 
 }
 
@@ -61,11 +66,13 @@ List<RouteBase> _buildRoutes() {
     _baseGoRoute(AppRoutes.cartScreen, (_) => CartScreen()),
     _baseGoRoute(AppRoutes.profile, (_) => ProfileView()),
     _baseGoRoute(AppRoutes.home, (_) => HomeView()),
+    _baseGoRoute(AppRoutes.wishist, (_) => WishistView()),
+    _baseGoRoute(AppRoutes.ContactSupport, (_) => ContactSupport()),
+    _baseGoRoute(AppRoutes.languageSelectionScreen, (_) => LanguageSelectionScreen()),
     _baseGoRoute<Map<String, dynamic>>(
       AppRoutes.BooksListScreen, (args) => BooksListScreen(title: args?['title'] ?? '',products: args?['products'] ?? [],
       ),
     ),
-    _baseGoRoute<List<Products>>(AppRoutes.bestSellerBooks, (p) => BestSellerBooksScreen(products: p ??[])),
     _baseGoRoute<Products>(AppRoutes.BestSellerBooksdetails, (p) => BestSellerBooksdetails(bookdetails:p,)),
 
 //    _baseGoRoute<HomeScreenWithNavigationBarData>(AppRoutes.homeScreenWithNavigationBar, (data) => HomeScreenWithNavigationBar(data: data)),

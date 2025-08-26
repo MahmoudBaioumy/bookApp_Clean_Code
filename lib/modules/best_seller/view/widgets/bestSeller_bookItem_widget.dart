@@ -1,13 +1,29 @@
 import 'package:flustra_template/core/constants/app_defults.dart';
+import 'package:flustra_template/core/helper/base_cubit/block_builder_widget.dart';
 import 'package:flustra_template/modules/home/data/response/book_response.dart';
 import 'package:flutter/material.dart';
 
-class BestSellerBookItemWidget extends StatelessWidget {
+class BestSellerBookItemWidget extends StatefulWidget {
   final Products book;
   final Function()? onTap;
-  BestSellerBookItemWidget({super.key, required this.book, required this.onTap,});
+  final Future<void> Function()? onTapAddToCart;
+  final Function()? onTapAddToFav;
 
+  BestSellerBookItemWidget({
+    super.key,
+    required this.book,
+    this.onTap,
+    this.onTapAddToCart,
+    this.onTapAddToFav,
+  });
 
+  @override
+  State<BestSellerBookItemWidget> createState() => _BestSellerBookItemWidgetState();
+}
+
+bool isLoading = false;
+
+class _BestSellerBookItemWidgetState extends State<BestSellerBookItemWidget> {
   // -------------------------- Discount Badge --------------------------
   Widget _buildDiscountBadge() {
     return Positioned(
@@ -20,7 +36,7 @@ class BestSellerBookItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          '${book.discount}%',
+          '${widget.book.discount}%',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -33,7 +49,7 @@ class BestSellerBookItemWidget extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(book.image??'', height: 120, width: 80, fit: BoxFit.cover),
+          child: Image.network(widget.book.image ?? '', height: 120, width: 80, fit: BoxFit.cover),
         ),
         _buildDiscountBadge(),
       ],
@@ -45,13 +61,13 @@ class BestSellerBookItemWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(book.name??'', style: const TextStyle(fontWeight: FontWeight.bold)),
-        Text(book.category??'', style: const TextStyle(color: Colors.grey)),
+        Text(widget.book.name ?? '', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(widget.book.category ?? '', style: const TextStyle(color: Colors.grey)),
         Row(
           children: [
-            Text('${book.price} L.E', style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey)),
+            Text('${widget.book.price} L.E', style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey)),
             const SizedBox(width: 8),
-            Text('${book.priceAfterDiscount} L.E', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+            Text('${widget.book.priceAfterDiscount} L.E', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
           ],
         ),
       ],
@@ -60,37 +76,55 @@ class BestSellerBookItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: Colors.grey.shade300),
-        ),
-        child: Row(
-          children: [
-            _buildBookImage(),
-            const SizedBox(width: 12),
-            Expanded(child: _buildPriceInfo()),
-            Column(
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_border,
-                    )),
-                SizedBox(height: 50),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.shopping_cart_outlined),
-                )
-              ],
-            )
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25),
+        border: Border.all(color: Colors.grey.shade300),
       ),
+      child: Row(
+        children: [
+          InkWell(onTap: widget.onTap, child: _buildBookImage()),
+          const SizedBox(width: 12),
+          Expanded(child: _buildPriceInfo()),
+          Column(
+            children: [
+              IconButton(
+                  onPressed: widget.onTapAddToFav,
+                  icon: Icon(
+                    Icons.favorite_border,
+                  )),
+              SizedBox(height: 50),
+              buildIconButtonAddCart()
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+// -------------------------- buildIconButtonAddCart -------------------------- //
+  IconButton buildIconButtonAddCart() {
+    return IconButton(
+      onPressed: () async {
+        // -------------------------- for check to not spam the api request -------------------------- //
+        if (isLoading) return;
+        isLoading = true;
+        setState(() {});
+        await widget.onTapAddToCart?.call();
+        isLoading = false;
+        setState(() {});
+      },
+      icon: isLoading
+          ? SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
+                strokeWidth: 2,
+              ))
+          : const Icon(Icons.shopping_cart_outlined),
     );
   }
 }
