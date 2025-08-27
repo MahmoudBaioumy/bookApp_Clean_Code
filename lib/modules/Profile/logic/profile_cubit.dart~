@@ -1,0 +1,53 @@
+import 'package:flustra_template/core/data/network/response/default_response.dart';
+import 'package:flustra_template/core/get_it/get_it.dart';
+import 'package:flustra_template/core/helper/base_cubit/bse_cubit.dart';
+import 'package:flustra_template/modules/Profile/data/repo.dart';
+import 'package:flustra_template/modules/Profile/data/request/edit_profile.dart';
+import 'package:flustra_template/modules/Profile/data/request/send_massage_request.dart';
+import 'package:flustra_template/modules/Profile/data/response/edit_profile.dart';
+import 'package:flustra_template/modules/Profile/data/response/profile_response.dart';
+
+enum ProfileCubitTypes {
+  none,
+  getProfile,
+  sendMassage,
+  editProfile,
+}
+
+class ProfileCubit extends BaseCubit<ProfileCubitTypes> {
+  final ProfileRepo _repo;
+
+  ProfileCubit(this._repo) : super(ProfileCubitTypes.none);
+  GetProfileResponse _profileResponse = GetProfileResponse();
+  DefaultResponse _sendResponse = DefaultResponse();
+
+  static ProfileCubit get i => getIt<ProfileCubit>();
+
+  // ========================== 🔥 GetProfile 🔥 ==========================
+  BaseEitherResponse<GetProfileResponse> getProfile() async {
+    return await fastFire(
+      type: ProfileCubitTypes.getProfile,
+      fun: () => _repo.getProfile(),
+      onSuccess: (r) => _profileResponse = r,
+      onFailure: (failure) => failure.printInfo("getProfile"),
+    );
+  }
+  // ========================== 🔥 send Massage 🔥 ========================== //
+  BaseEitherResponse<DefaultResponse> sendMassage({required ContactRequest request}) async {
+    return await fastFire(
+      type: ProfileCubitTypes.sendMassage,
+      fun: () => _repo.sendMessage(request: request),
+      onSuccess: (r) => _sendResponse = r,
+      onFailure: (failure) => failure.printInfo("sendMassage"),
+    );
+  }
+// ========================== 🔥 edit Profile 🔥 ========================== //
+  BaseEitherResponse<EditProfile> updateProfile({required ProfileUpdateRequest request}) async {
+    return await fastFire(
+      type: ProfileCubitTypes.editProfile,
+      fun: () => _repo.updateProfile(request: request),
+      onSuccess: (x) {},
+      onFailure: (failure) => failure.printInfo("updateProfile"),
+    );
+  }
+}

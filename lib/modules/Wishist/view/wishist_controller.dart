@@ -31,8 +31,25 @@ class WishistController extends ChangeNotifier {
       },
     );
   }
+// --------------------------  --------------------------
+  Future<void> removeFromWishlist(int index) async {
+    final bookId = _FavItems[index].id ?? 0;
 
+    final res = await _cubit.removeFromWishlist(bookId: bookId);
 
+    res.fold(
+          (failure) {
+        // لو فشل الريكوست، خلي العنصر يظهر زي ما هو
+        failure.showToast();
+      },
+          (r) {
+        // لو نجح الريكوست، احذف العنصر من الليست
+        _FavItems.removeAt(index);
+        // حدث الـ UI
+        notifyListeners();
+      },
+    );
+  }
 
   // ========================== 🌍 Public methods and events 🌍 ==========================
   void onTapRemove(int index) {
@@ -41,7 +58,7 @@ class WishistController extends ChangeNotifier {
   }
 
   // ========================== 🔒 Private methods 🔒 ==========================
-  void _loadFavorites() {
+  void onTapAddCart() {
     notifyListeners();
   }
 }

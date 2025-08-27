@@ -1,5 +1,5 @@
 import 'package:flustra_template/core/constants/app_defults.dart';
-import 'package:flustra_template/core/helper/base_cubit/block_builder_widget.dart';
+import 'package:flustra_template/modules/best_seller/view/best_seller_detials.dart';
 import 'package:flustra_template/modules/home/data/response/book_response.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,8 @@ class BestSellerBookItemWidget extends StatefulWidget {
   final Products book;
   final Function()? onTap;
   final Future<void> Function()? onTapAddToCart;
-  final Function()? onTapAddToFav;
+  final Future<void> Function()? onTapAddToFav;
+  final bool initiallyFav;
 
   BestSellerBookItemWidget({
     super.key,
@@ -15,15 +16,24 @@ class BestSellerBookItemWidget extends StatefulWidget {
     this.onTap,
     this.onTapAddToCart,
     this.onTapAddToFav,
+    this.initiallyFav = false,
   });
 
   @override
   State<BestSellerBookItemWidget> createState() => _BestSellerBookItemWidgetState();
 }
 
-bool isLoading = false;
-
 class _BestSellerBookItemWidgetState extends State<BestSellerBookItemWidget> {
+  bool isLoadingCart = false;
+  bool isLoadingFav = false;
+  bool isFav = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isFav = widget.initiallyFav;
+  }
+
   // -------------------------- Discount Badge --------------------------
   Widget _buildDiscountBadge() {
     return Positioned(
@@ -89,34 +99,45 @@ class _BestSellerBookItemWidgetState extends State<BestSellerBookItemWidget> {
           const SizedBox(width: 12),
           Expanded(child: _buildPriceInfo()),
           Column(
-            children: [
-              IconButton(
-                  onPressed: widget.onTapAddToFav,
-                  icon: Icon(
-                    Icons.favorite_border,
-                  )),
-              SizedBox(height: 50),
-              buildIconButtonAddCart()
-            ],
+            children: [buildIconButtonAddFav(), SizedBox(height: 50), buildIconButtonAddCart()],
           )
         ],
       ),
     );
   }
 
+// -------------------------- buildIconButtonAddFav -------------------------- //
+  IconButton buildIconButtonAddFav() {
+    return IconButton(
+      onPressed: () async {
+        await controller.toggleFavourite(widget.book.id ?? 0);
+        setState(() {}); // تحدث الـ UI بعد العملية
+      },
+      icon: Icon(
+        controller.favoriteBookIds.contains(widget.book.id ?? 0)
+            ? Icons.favorite
+            : Icons.favorite_border,
+        color: controller.favoriteBookIds.contains(widget.book.id ?? 0)
+            ? Colors.red
+            : null,
+      ),
+    );
+  }
+
+
 // -------------------------- buildIconButtonAddCart -------------------------- //
   IconButton buildIconButtonAddCart() {
     return IconButton(
       onPressed: () async {
         // -------------------------- for check to not spam the api request -------------------------- //
-        if (isLoading) return;
-        isLoading = true;
+        if (isLoadingCart) return;
+        isLoadingCart = true;
         setState(() {});
         await widget.onTapAddToCart?.call();
-        isLoading = false;
+        isLoadingCart = false;
         setState(() {});
       },
-      icon: isLoading
+      icon: isLoadingCart
           ? SizedBox(
               height: 20,
               width: 20,

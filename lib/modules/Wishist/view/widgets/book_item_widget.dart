@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 
 class BookItemWidget extends StatelessWidget {
   final VoidCallback onRemove;
+  final VoidCallback onAddCart;
   final FavData product;
 
   const BookItemWidget({
     super.key,
     required this.onRemove,
-    required this.product,
+    required this.product, required this.onAddCart,
   });
 
   @override
@@ -79,9 +80,7 @@ class BookItemWidget extends StatelessWidget {
                 const SizedBox(height: 8),
                 IconButton(
                   icon: Icon(Icons.shopping_cart_outlined, color: AppColors.primary),
-                  onPressed: () {
-                    // todo: Add to cart
-                  },
+                  onPressed: onAddCart
                 ),
               ],
             ),

@@ -24,7 +24,22 @@ class BestSellerBooksDetailsController extends ChangeNotifier {
 // ========================== 🔒 Private methods 🔒 ==========================
 
   // ========================== 🔥 onTapFavourite 🔥 ========================== //
-  // ========================== 🔥 loadFavoriteBooks 🔥 ========================== //
+
+  Future<void> onTapFavourite(int bookId) async {
+    final res = await WishlistCubit.i.addToWishlist(bookId: bookId);
+    res.fold(
+          (failure) => failure.showToast(),
+          (r) {
+        AppBotToast.show("Added to wishlist Success", type: ToastType.success);
+
+        // ✅ تحديث الـ favoriteBookIds حسب النتيجة
+        if (!favoriteBookIds.contains(bookId)) {
+          favoriteBookIds.add(bookId);
+        }
+        notifyListeners();
+      },
+    );
+  }
 
   Future<void> loadFavoriteBooks() async {
     final res = await WishlistCubit.i.getWishlist(); // بيرجع Either<Failure, addWishlistResponse>
@@ -45,8 +60,6 @@ class BestSellerBooksDetailsController extends ChangeNotifier {
 
     notifyListeners();
   }
-  // ========================== 🔥 toggleAddFavourite 🔥 ========================== //
-
   Future<void> toggleFavourite(int bookId) async {
     if (favoriteBookIds.contains(bookId)) {
       // محاولة المسح
@@ -78,6 +91,8 @@ class BestSellerBooksDetailsController extends ChangeNotifier {
       } catch (e) {}
     }
   }
+
+
 
 // ========================== 🔥 onTapCart 🔥 ========================== //
 

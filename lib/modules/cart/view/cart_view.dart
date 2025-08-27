@@ -91,12 +91,13 @@ class _CartScreenState extends State<CartScreen> {
 
 // -------------------------- _buildListCartView -------------------------- //
   Widget _buildListCartView({required bool isLoading}) {
-    if (_controller.cartItems.isEmpty) {
+    final products= _controller.cartItems;
+    if (!isLoading && products.isEmpty) {
       return Center(
           child: EmptyScreen(
-        title: 'Your cart is empty',
-        image: AppAssetsImages.other.emptyCart,
-      ));
+            title: 'Your cart is empty',
+            image: AppAssetsImages.other.emptyCart,
+          ));
     }
     return ListView.separated(
       separatorBuilder: (context, index) => SizedBox(height: 10),
