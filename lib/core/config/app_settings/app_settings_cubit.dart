@@ -39,10 +39,10 @@ class AppSettingsCubit extends BaseCubit<AppSettingsCubitTypes> {
 // ========================== 🔥 handel settings 🔥 ==========================
   AppSettingsModel _settings = AppSettingsModel.defaults();
 
-  void saveSettings(AppSettingsModel settings) => AppCache.saveData(key: CacheKey.publicSettings, value: settings.toJson());
+  void saveSettings(AppSettingsModel settings) => AppCache.saveData(key: CacheKey.loginResponse, value: settings.toJson());
 
   AppSettingsModel loadSettings() {
-    Map<String, dynamic>? data = AppCache.getMap(key: CacheKey.publicSettings);
+    Map<String, dynamic>? data = AppCache.getMap(key: CacheKey.loginResponse);
     return AppSettingsModel.fromJson(data ?? {});
   }
 }

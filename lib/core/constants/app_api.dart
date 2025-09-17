@@ -1,44 +1,17 @@
 abstract class ApiConstants {
-  static const String _baseUrl = "https://codingarabic.online/api";
+  static const String baseUrl = "https://gtek.pri-po.com";
 
-  static const String baseUrl = _baseUrl;
+  // Api Endpoints
+  // -------------------------- control sub task --------------------------
+  static String stopTimerForSubTask(String subTaskId) => "/api/subtasks/$subTaskId/store_timer";
 
-  static final _AuthApi auth = _AuthApi();
-  static final _HomeApi home = _HomeApi();
-  static final _cart cart = _cart();
-  static final _profile profile = _profile();
-  static final _favorites favorites = _favorites();
-}
+  static String startTimerForSubTask(int subTaskId) => "/api/subtasks/$subTaskId/start";
 
-// ========================== 🔥 Auth End points 🔥 ========================== //
-class _AuthApi {
-  final String login = "/login";
-  final String register = "/register";
-}
-// ========================== 🔥 Home End points 🔥 ========================== //
+  static String completeSubTask(int subTaskId) => "/api/subtasks/complete/$subTaskId";
+  static const String storeSubTask = "/api/subtasks/store";
 
-class _HomeApi {
-  final String homeBestSeller = "/products-bestseller";
-  final String homeNewArrivals = "/products-new-arrivals";
-}
-
-// ========================== 🔥 cart End points 🔥 ========================== //
-class _cart {
-  final String getCart = '/cart';
-  final String removeCart = '/remove-from-cart';
-  final String addCart = '/add-to-cart';
-}
-
-// ========================== 🔥 profile End points 🔥 ========================== //
-class _profile {
-  final String getProfile = '/profile';
-  final String UpdateProfile = '/update-profile';
-  final String contactUs = '/contact-us';
-}
-
-// ========================== 🔥 favorites End points 🔥 ========================== //
-class _favorites {
-  final String getFavorites = '/wishlist';
-  final String addToFavorites = '/add-to-wishlist';
-  final String removeFromFavorites = '/remove-from-wishlist';
+  // -------------------------- projects + tasks --------------------------
+  static String tasksInCategory(int categoryID) => "/api/categories/$categoryID/tasks";
+  static const String getAllCategories = "/api/categories";
+  static const String addTask = "/api/tasks/add";
 }

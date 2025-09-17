@@ -122,11 +122,4 @@ class AppValidators {
     }
     return null;
   }
-  // ========================== 🔥 city 🔥 ========================== //
-  static String? city(String? value) {
-    final emptyCheck = _validateEmpty(value);
-    if (emptyCheck != null) return emptyCheck;
-    return null;
-  }
-
 }

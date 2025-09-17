@@ -10,7 +10,6 @@ const Map<String, String> arJson = {
   ..._arJsonLanguage,
   ..._arJsonValidators,
   ..._enJsonErrorHandler,
-  ..._enJsonAllAppString
 };
 
 const Map<String, dynamic> _arJsonLanguage = {
@@ -47,26 +46,4 @@ const Map<String, String> _arJsonValidators = {
   AppStrings.errorInvalidUsername: "يجب أن يكون اسم المستخدم من 3 إلى 16 حرفًا ويتكون من أحرف وأرقام.",
   AppStrings.errorInvalidFullName: "يرجى إدخال اسم كامل صالح.",
   AppStrings.errorInvalidUrl: "يرجى إدخال رابط إلكتروني صالح."
-};
-const Map<String, dynamic> _enJsonAllAppString = {
-  AppStrings.login: "تسجيل الدخول",
-  AppStrings.register: "إنشاء حساب",
-  AppStrings.logout: "تسجيل الخروج",
-  AppStrings.email: "البريد الإلكتروني",
-  AppStrings.alreadyHaveAccount: "هل لديك حساب بالفعل؟",
-  AppStrings.password: "كلمة المرور",
-  AppStrings.confirmPassword: "تأكيد كلمة المرور",
-  AppStrings.dontHaveAccount: "ليس لديك حساب؟",
-  AppStrings.username: "اسم المستخدم",
-  AppStrings.joinUs: "انضم إلينا!",
-  AppStrings.phone: "رقم الهاتف",
-  AppStrings.name: "الاسم",
-  AppStrings.city: "المدينة",
-  AppStrings.address: "العنوان",
-  AppStrings.profile: "الملف الشخصي",
-  AppStrings.editProfile: "تعديل الملف الشخصي",
-  AppStrings.lang: "اللغة",
-  AppStrings.chooseLanguage: "اختر اللغة",
-  AppStrings.bestSeller: "الأكثر مبيعًا",
-  AppStrings.newArrival: "وصل حديثًا",
 };

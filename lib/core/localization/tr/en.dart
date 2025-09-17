@@ -14,7 +14,6 @@ const Map<String, String> enJson = {
   AppStrings.german: 'German',
   ..._enJsonErrorHandler,
   ..._enJsonValidators,
-  ..._enJsonAllApp,
 };
 
 // ========================== 🔥 Validators 🔥 ==========================
@@ -45,32 +44,4 @@ const Map<String, dynamic> _enJsonErrorHandler = {
   AppStrings.errorConnection: "Connection error. Please check your network and try again.",
   AppStrings.errorUnknown: "Unexpected error occurred. Please try again later.",
 // ========================== 🔥 End error handler 🔥 ==========================
-};
-
-
-const Map<String, dynamic> _enJsonAllApp = {
-  // 🔥 Auth
-  AppStrings.login: "Login",
-  AppStrings.register: "Register",
-  AppStrings.logout: "Logout",
-  AppStrings.email: "Email",
-  AppStrings.alreadyHaveAccount: "Already have an account?",
-  AppStrings.password: "Password",
-  AppStrings.confirmPassword: "Confirm Password",
-  AppStrings.dontHaveAccount: "Don't have an account?",
-  AppStrings.username: "Username",
-  AppStrings.joinUs: "Join Us!",
-  AppStrings.phone: "Phone",
-  AppStrings.name: "Name",
-  AppStrings.city: "City",
-  AppStrings.address: "Address",
-  AppStrings.profile: "Profile",
-  AppStrings.editProfile: "Edit Profile",
-  AppStrings.lang: "Language",
-  AppStrings.chooseLanguage: "Choose Language",
-
-  // 🔥 Home
-  AppStrings.bestSeller: "Best Seller",
-  AppStrings.newArrival: "New Arrival",
-
 };

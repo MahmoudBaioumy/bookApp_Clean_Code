@@ -15,6 +15,7 @@ class AppColors {
   /// Main primary color used throughout the app.
   static Color get primary => _theme.primaryColor;
 
+  static Color get secondaryPrimary3 => _getAppColorsBase.accentOrange;
 
   static Color get secondaryPrimary => _theme.colorScheme.secondary;
 

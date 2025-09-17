@@ -40,7 +40,7 @@ ThemeData generateBaseThemeData({required AppColorsBase myColors, required bool 
     // -------------------------------------------------------------------------
 
     // ========================== 🔥 Fonts 🔥 ==========================
-    fontFamily: "Cairo",
+    fontFamily: "poppins",
 
     textTheme: TextTheme(
       // -------------------------- display --------------------------
@@ -110,7 +110,7 @@ ThemeData generateBaseThemeData({required AppColorsBase myColors, required bool 
     // ========================== 🔥 TextButton 🔥 ==========================
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: myColors.primary,
+        foregroundColor: myColors.accentOrange,
         textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
       ),
     ),
@@ -131,7 +131,7 @@ ThemeData generateBaseThemeData({required AppColorsBase myColors, required bool 
     highlightColor: Colors.transparent,
     // ========================== 🔥 FAB 🔥 ==========================
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: myColors.primary,
+      backgroundColor: myColors.accentOrange,
       foregroundColor: Colors.white,
     ),
     // -------------------------------------------------------------------------

@@ -2,6 +2,7 @@ class AppAssetsImages {
   AppAssetsImages._();
 
   static final _AppAssetsImagesLogo logo = _AppAssetsImagesLogo._();
+  static final _AppAssetsImagesOnboarding onboarding = _AppAssetsImagesOnboarding._();
   static final _AppAssetsImagesFlags flags = _AppAssetsImagesFlags._();
   static final _AppAssetsImagesOther other = _AppAssetsImagesOther._();
 }
@@ -13,7 +14,17 @@ class _AppAssetsImagesLogo {
   final String logo = 'assets/logo/logo.png';
 }
 
-// ========================== 🔥  Flags 🔥 ========================== //
+// ========================== 🔥  Onboarding 🔥 ==========================
+
+class _AppAssetsImagesOnboarding {
+  const _AppAssetsImagesOnboarding._();
+
+  final String onboarding1 = 'assets/images/onboarding/onboarding1.png';
+  final String onboarding2 = 'assets/images/onboarding/onboarding2.png';
+  final String onboarding3 = 'assets/images/onboarding/onboarding3.png';
+}
+
+// ========================== 🔥  Flags 🔥 ==========================
 
 class _AppAssetsImagesFlags {
   const _AppAssetsImagesFlags._();
@@ -26,8 +37,4 @@ class _AppAssetsImagesFlags {
 
 class _AppAssetsImagesOther {
   const _AppAssetsImagesOther._();
-
-  final String contact = 'assets/images/app_images/contact.jpg';
-  final String emptyCart = 'assets/images/app_images/emptyCart.png';
-  final String emptyFavorite = 'assets/images/app_images/favEmpty.png';
 }
